@@ -34,56 +34,32 @@ from webdriver_manager.chrome import ChromeDriverManager
 # driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
 
 
-class GoogleTestCases(unittest.TestCase):
+class TestActionChains(unittest.TestCase):
+    """
+    Action chain example:
+
+    ActionChains(driver).move_to_element(dropdown).click(dynamic_option).perform()
+    """
     def setUp(self) -> None:
         global driver
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         # driver.implicitly_wait(15)
         driver.get("http://clouditeducation.com/pruebas/")
 
-    def test_a_dropdown(self):
-        '''Print element class'''
-        # deselect_all()
-        # deselect_by_index(index)
-        # deselect_by_value(value)
-        # deselect_by_visible_text(text)
-        # select_by_index(index)
-        # select_by_value(value)
-        # select_by_visible_text(text)
-        driver.get("http://clouditeducation.com/pruebas/")
-        ingredientes = driver.find_element(By.NAME, "ingrediente")
-        content = driver.find_element(By.CLASS_NAME, "content")
-        if ingredientes is not None:
-            ingredienteSel = Select(ingredientes)
-            ingredienteSel.select_by_value("cebolla")
-            print(ingredientes.get_attribute("name"))
-            time.sleep(1)
-        if content is not None:
-            print("Class : ", content.get_attribute("class"))
-
-    def testActionChains(self):
-        driver.get("http://clouditeducation.com/pruebas/")
+    def test1(self):
+        # First, find the button with the on hover menu
         botonMenu = driver.find_element(By.CLASS_NAME, "dropbtn")
         if botonMenu is not None:
             acciones = ActionChains(driver)
+
+            # Second, hover over the element
             acciones.move_to_element(botonMenu).perform()
-            # The menu shows
+            # Next, the dynamic menu shows
+
+            # Finally, move to Link 1 and click the menu option
             liga = driver.find_element(By.LINK_TEXT, "Link 1")
-            acciones.move_to_element(liga)
-            acciones.click()
-            acciones.perform()
+            acciones.move_to_element(liga).click().perform()
             time.sleep(3)
-
-    def testExplicitWait(self):
-        espera = WebDriverWait(driver, 10)  # Espera explícita, 10 segundos para conseguir la condición deseada
-        driver.get("http://clouditeducation.com/pruebas/")
-        window_title = driver.title
-        print(window_title)
-        boton = espera.until(EC.element_to_be_clickable((By.ID, "proceed")))
-        if boton is not None:
-            boton.click()
-
-        time.sleep(3)
 
     def tearDown(self) -> None:
         driver.quit()

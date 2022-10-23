@@ -29,16 +29,10 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
 # driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
-class findByIdName(unittest.TestCase):
+class TestPythonSite(unittest.TestCase):
     def setUp(self) -> None:
         global driver
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
-    def testCloudItEducation(self):
-        driver.get("http://www.clouditeducation.com/pruebas/")
-        element = driver.find_element(By.CLASS_NAME, "content")
-        if element is not None:
-            print("El elemento fue encontrado")
 
     def testPythonSite(self):
         driver.get("http://www.python.org")

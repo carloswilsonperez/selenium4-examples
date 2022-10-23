@@ -14,22 +14,38 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-class TestSendKeys(unittest.TestCase):
+class TestOptionsAndCheckboxes(unittest.TestCase):
     def setUp(self):
         global driver
         driver = webdriver.Firefox()
         driver.get("http://clouditeducation.com/pruebas/")
 
-    def testActions(self):
-        # This shows how to click on a link element
-        liga = driver.find_element(By.XPATH, "//a[contains(text(), 'Pagina 2')]")
-        if liga is not None:
-            liga.click()
+    def test1(self):
+        print("radio")
+        buton1 = driver.find_element_by_id("RadioGroup1_0")
+        if buton1 is not None:
+            buton1.click()
 
-        # This shows how to enter a value in an input element
-        nombre = driver.find_element(By.XPATH, "//input[@id='Segundo']")
-        if nombre is not None:
-            nombre.send_keys("Juan")
+        time.sleep(5)
+
+        buton2 = driver.find_element_by_id("RadioGroup1_1")
+        if buton2 is not None:
+            buton2.click()
+
+        time.sleep(5)
+
+    def test2(self):
+        print("check")
+        buton1 = driver.find_element_by_id("CheckboxGroup1_0")
+        if buton1 is not None:
+            buton1.click()
+
+        time.sleep(5)
+
+        buton2 = driver.find_element_by_id("CheckboxGroup1_1")
+        if buton2 is not None:
+            buton2.click()
+
         time.sleep(5)
 
     def tearDown(self):

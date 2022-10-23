@@ -27,9 +27,9 @@ class TestSendKeys(unittest.TestCase):
             anchor.click()
 
         # This shows how to enter a value in an input element
-        nombre = driver.find_element(By.XPATH, "//input[@id='Segundo']")
-        if nombre is not None:
-            nombre.send_keys("Juan")
+        nombreInput = driver.find_element(By.XPATH, "//input[@id='Segundo']")
+        if nombreInput is not None:
+            nombreInput.send_keys("Juan")
         time.sleep(5)
 
     def tearDown(self):
